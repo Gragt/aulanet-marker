@@ -2,6 +2,7 @@
 
 from selenium import webdriver
 from selenium.webdriver.firefox.options import Options
+from selenium.webdriver.common.keys import Keys
 
 
 class AulaNetSession:
@@ -24,6 +25,21 @@ class AulaNetSession:
             self.browser.find_elements("class name", "CS_even")
             + self.browser.find_elements("class name", "CS_odd")
         )
+
+    def input_marks(self, student, marks):
+        """
+        Input marks in each box.
+
+        Inputs:
+            student, a Selenium object.
+            marks, a list of ints.
+        """
+        boxes = student.find_elements("class name", "CS_calificacion")
+        marks_data = dict(zip(boxes, marks))
+        for box, mark in marks_data.items():
+            for x in range(10):
+                box.send_keys(Keys.BACK_SPACE)
+            box.send_keys(mark)
 
     def browser_close(self):
         """Close sessions."""
