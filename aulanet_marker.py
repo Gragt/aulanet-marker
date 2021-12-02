@@ -29,10 +29,10 @@ class AulaNetSession:
             + self.browser.find_elements("class name", "CS_odd")
         )
 
-    def get_id(self, student):
-        """Get student’s ID number."""
-        regex = re.compile(r"\d{6}")
-        return regex.search(student.text).group()
+    def get_info(self, student):
+        """Get student’s ID number and name."""
+        regex = re.compile(r"^(\d{6})\n([\w ]*)\n")
+        return regex.search(student.text).groups()
 
     def input_marks(self, student, marks):
         """
