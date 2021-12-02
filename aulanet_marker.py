@@ -41,7 +41,7 @@ class AulaNetSession:
                 box.send_keys(Keys.BACK_SPACE)
             box.send_keys(mark)
 
-    def browser_close(self):
+    def close_browser(self):
         """Close sessions."""
         self.browser.close()
 
@@ -52,7 +52,7 @@ def aulanet_marker():
     session = AulaNetSession()
     print("Please manually log into AulaNet.")
     input("Press Enter when ready to continue.")
-    session.browser_close()
+    session.close_browser()
 
 
 # aulanet_marker()
