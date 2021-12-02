@@ -1,5 +1,7 @@
 """A script that inputs marks on AulaNet from an Excel file source."""
 
+import re
+
 from selenium import webdriver
 from selenium.webdriver.firefox.options import Options
 from selenium.webdriver.common.keys import Keys
@@ -25,6 +27,11 @@ class AulaNetSession:
             self.browser.find_elements("class name", "CS_even")
             + self.browser.find_elements("class name", "CS_odd")
         )
+
+    def get_id(self, student):
+        """Get student’s ID number."""
+        regex = re.compile(r"\d{6}")
+        return regex.search(student.text).group()
 
     def input_marks(self, student, marks):
         """
