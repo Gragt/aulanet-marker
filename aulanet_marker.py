@@ -1,5 +1,6 @@
 """A script that inputs marks on AulaNet from an Excel file source."""
 
+import csv
 import re
 
 from selenium import webdriver
@@ -53,6 +54,23 @@ class AulaNetSession:
         self.browser.close()
 
 
+def get_marks(marks_file):
+    """
+    Parse students’ information from CSV.
+
+    Returns:a dictionary.
+    """
+    file = open(marks_file)
+    reader = csv.reader(file)
+    student_data = list(reader)
+    final = {}
+    for student in student_data:
+        final.setdefault(
+            student[0], [int(student[x]) for x in range(2, len(student))]
+        )
+    return final
+
+
 def aulanet_marker():
     """Open session and awaits input to parse and copy marks."""
     print("Opening web browser …")
@@ -63,3 +81,4 @@ def aulanet_marker():
 
 
 # aulanet_marker()
+print(get_marks("marks.csv"))
