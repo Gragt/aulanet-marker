@@ -18,6 +18,13 @@ class AulaNetSession:
         self.browser = webdriver.Firefox(options=options)
         self.browser.get("https://erp.aulanet.com.mx")
 
+    def get_students(self):
+        """Get students from webpage."""
+        self.students = (
+            self.browser.find_elements("class name", "CS_even")
+            + self.browser.find_elements("class name", "CS_odd")
+        )
+
     def browser_close(self):
         """Close sessions."""
         self.browser.close()
