@@ -49,6 +49,18 @@ class AulaNetSession:
                 box.send_keys(Keys.BACK_SPACE)
             box.send_keys(mark)
 
+    def write_csv(self, filename):
+        """
+        Write students’ information to CSV file.
+
+        Inputs: filename, a csv file.
+        """
+        file = open(filename, "a")
+        writer = csv.writer(file)
+        for item in self.students:
+            writer.writerow(self.get_info(item) + ["", "", "", "", ""])
+        file.close()
+
     def close_browser(self):
         """Close sessions."""
         self.browser.close()
