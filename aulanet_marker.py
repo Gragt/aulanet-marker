@@ -49,6 +49,17 @@ class AulaNetSession:
                 box.send_keys(Keys.BACK_SPACE)
             box.send_keys(mark)
 
+    def input_marks_all(self, marks_data):
+        """
+        Input marks for all students on the page.
+
+        Inputs: marks_data, a dictionary.
+        """
+        for student in self.students:
+            self.input_marks(
+                student, marks_data.get(self.get_info(student)[0])
+            )
+
     def write_csv(self, filename):
         """
         Write students’ information to CSV file.
@@ -89,14 +100,10 @@ def aulanet_marker(marks_data):
     session = AulaNetSession()
     print("Please manually log into AulaNet.")
     input("Press Enter when ready to continue.")
-    while True:
-        session.get_students()
-        for student in session.students:
-            session.input_marks(
-                student, marks_data.get(session.get_id(student))
-            )
-        input("Done with this page.")
+    session.get_students()
+    session.input_marks_all(marks_data)
+    input("Done with this page.")
     session.close_browser()
 
 
-# aulanet_marker(get_marks("marks.csv"))
+aulanet_marker(get_marks("marks.csv"))
