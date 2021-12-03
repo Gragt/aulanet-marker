@@ -94,16 +94,26 @@ def get_marks(marks_file):
     return final
 
 
-def aulanet_marker(marks_data):
+def aulanet_marker():
     """Open session and awaits input to parse and copy marks."""
     print("Opening web browser …")
     session = AulaNetSession()
     print("Please manually log into AulaNet.")
-    input("Press Enter when ready to continue.")
-    session.get_students()
-    session.input_marks_all(marks_data)
-    input("Done with this page.")
-    session.close_browser()
+    while True:
+        choice = input(
+            "Press q to quit, s to save page data to marks.csv, "
+            "and any other key to input marks on this page. "
+        )
+        if choice == "q":
+            session.close_browser()
+            break
+        elif choice == "s":
+            session.get_students()
+            session.write_csv("marks.csv")
+        else:
+            session.get_students()
+            session.input_marks_all(get_marks("marks.csv"))
+        print("Done with this page.")
 
 
-aulanet_marker(get_marks("marks.csv"))
+aulanet_marker()
