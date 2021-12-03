@@ -31,8 +31,8 @@ class AulaNetSession:
 
     def get_info(self, student):
         """Get student’s ID number and name."""
-        regex = re.compile(r"^(\d{6})\n([\w ]*)\n")
-        return regex.search(student.text).groups()
+        regex = re.compile(r"^(\d{6})\n(.+?)\n")
+        return list(map(str.title, regex.search(student.text).groups()))
 
     def input_marks(self, student, marks):
         """
