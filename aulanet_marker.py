@@ -40,7 +40,7 @@ class AulaNetSession:
 
         Inputs:
             student, a Selenium object.
-            marks, a list of ints.
+            marks, a list of strs.
         """
         boxes = student.find_elements("class name", "CS_calificacion")
         marks_data = dict(zip(boxes, marks))
@@ -89,7 +89,7 @@ def get_marks(marks_file):
     final = {}
     for student in student_data:
         final.setdefault(
-            student[0], [int(student[x]) for x in range(2, len(student))]
+            student[0], [student[x] for x in range(2, len(student))]
         )
     return final
 
