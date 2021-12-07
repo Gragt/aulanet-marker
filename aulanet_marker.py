@@ -8,7 +8,7 @@ from selenium.webdriver.firefox.options import Options
 from selenium.webdriver.common.keys import Keys
 
 
-class AulaNetSession:
+class AulaNetSession(object):
     """The browser session and functions."""
 
     def __init__(self):
