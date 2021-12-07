@@ -5,7 +5,6 @@ import re
 
 from selenium import webdriver
 from selenium.webdriver.firefox.options import Options
-from selenium.webdriver.common.keys import Keys
 
 
 class AulaNetSession(object):
@@ -45,8 +44,7 @@ class AulaNetSession(object):
         boxes = student.find_elements("class name", "CS_calificacion")
         marks_data = dict(zip(boxes, marks))
         for box, mark in marks_data.items():
-            for x in range(10):
-                box.send_keys(Keys.BACK_SPACE)
+            box.clear()
             box.send_keys(mark)
 
     def input_marks_all(self, marks_data):
